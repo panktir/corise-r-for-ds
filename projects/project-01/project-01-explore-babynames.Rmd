@@ -6,7 +6,7 @@ output: github_document
 ```{r setup, message = FALSE, include = FALSE}
 knitr::opts_chunk$set(
   echo = TRUE,
-  eval = FALSE,
+  error = TRUE,
   comment = "#>",
   fig.path = "img/",
   fig.retina = 2,
@@ -382,9 +382,9 @@ get_letter_type <- function(letter) {
 
 tbl_names_vowel_consonant <- tbl_names |> 
   # Add NEW column named `first_letter_type`
-   mutate(first_letter_type = get_letter_type(str_sub(name, 1, 1))) |> 
+   mutate(first_letter_type = get_letter_type(first_letter)) |> 
   # Add NEW column named `last_letter_type`
-  mutate(last_letter_type = get_letter_type(str_sub(name, -1))) |> 
+  mutate(last_letter_type = get_letter_type(last_letter)) |> 
   # Group by `sex`, `year`, `first_letter_type` and `last_letter_type`
   group_by(sex, year, first_letter_type, last_letter_type) |>
   # Summarize the total number of births
